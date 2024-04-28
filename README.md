@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The goal is to develop a simple and efficient Kanban board. **Kanban** is task management system designed to help users organize tasks and projects using visual boards. The application allows for the creation and customization of columns to represent different stages of work, as well as task management features such as editing, filtering, and prioritizing tasks.
+The goal is to develop a simple and efficient Kanban board interface. **Kanban** is task management system designed to help users organize tasks and projects using visual boards. The application allows for the creation and customization of columns to represent different stages of work, as well as task management features such as editing, filtering, and prioritizing tasks.
 
 ## Functionalities
 
