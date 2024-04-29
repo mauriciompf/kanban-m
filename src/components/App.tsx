@@ -1,3 +1,9 @@
+import Column from "./Column.tsx";
+
 export default function App() {
-  return <h1>Hello, kanban!</h1>;
+  return (
+    <main>
+      <Column />
+    </main>
+  );
 }

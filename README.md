@@ -21,3 +21,4 @@ The goal is to develop a simple and efficient Kanban board interface. **Kanban**
 - [Vite](https://vitejs.dev)
 - [ReactJS](https://react.dev)
 - [TypeScript](https://www.typescriptlang.org)
+- [TailwindCSS](https://tailwindcss.com)
