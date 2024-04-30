@@ -1,9 +1,17 @@
+import { useState } from "react";
 import Button from "../utils/Button";
 import TaskDetails from "./TaskDetails";
 
+import ItemCard from "./ItemCard";
+
 export default function Column() {
+  const [showTaskDetails, setShowTaskDetails] = useState(false);
+  const [showItem, setShowItem] = useState(false);
+
+  const handleNewTaskButton = () => setShowTaskDetails(true);
+
   return (
-    <div className="w-[18.75rem] border-solid border border-black  p-4 m-8">
+    <div className="w-[18.75rem] border-solid border border-black p-4 m-8">
       <div className="border-b border-black pb-4 ">
         <input
           type="text"
@@ -11,13 +19,20 @@ export default function Column() {
           className="bg-transparent w-full"
         />
       </div>
-
       <Button
+        onClick={handleNewTaskButton}
         className={"border-b border-black w-full py-2"}
         label="+ add new task"
       />
 
-      <TaskDetails />
+      {showTaskDetails ? (
+        <TaskDetails
+          setShowItem={setShowItem}
+          setShowTaskDetails={setShowTaskDetails}
+        />
+      ) : null}
+
+      {showItem ? <ItemCard /> : null}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 interface Btn {
-  label: string;
+  label: string | React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLElement>;
   className: string;
 }
