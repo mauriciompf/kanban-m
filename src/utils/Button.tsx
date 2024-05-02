@@ -1,7 +1,7 @@
 interface Btn {
   label: string | React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLElement>;
-  className: string;
+  className?: string;
 }
 
 export default function Button({
