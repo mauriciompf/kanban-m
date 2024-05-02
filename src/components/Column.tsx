@@ -7,6 +7,8 @@ import ItemCard from "./ItemCard";
 export default function Column() {
   const [showTaskDetails, setShowTaskDetails] = useState(false);
   const [showItem, setShowItem] = useState(false);
+  const [titleValue, setTitleValue] = useState("");
+  const [task, setTask] = useState([]);
 
   const handleNewTaskButton = () => setShowTaskDetails(true);
 
@@ -29,10 +31,11 @@ export default function Column() {
         <TaskDetails
           setShowItem={setShowItem}
           setShowTaskDetails={setShowTaskDetails}
+          setTitleValue={setTitleValue}
         />
       ) : null}
 
-      {showItem ? <ItemCard /> : null}
+      {showItem ? <ItemCard titleValue={titleValue} /> : null}
     </div>
   );
 }
