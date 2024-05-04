@@ -34,6 +34,7 @@ export default function Column() {
       {showTaskDetails && (
         <TaskDetails
           setShowTaskDetails={setShowTaskDetails}
+          showTaskDetails
           addItem={addItem}
           setTitleValue={setTitleValue}
           titleValue={titleValue}

@@ -2,9 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "../utils/Button";
+import React from "react";
 
 interface Props {
   setShowTaskDetails: (value: boolean) => void;
+  showTaskDetails: boolean;
   addItem: (title: string, priority: string) => void;
   setTitleValue: (value: string) => void;
   titleValue: string;
@@ -14,6 +16,7 @@ interface Props {
 
 export default function TaskDetails({
   setShowTaskDetails,
+  showTaskDetails,
   addItem,
   setTitleValue,
   titleValue,
@@ -31,6 +34,31 @@ export default function TaskDetails({
 
   const handlePriorityChange = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setPriority(e.target.value);
+
+  const Priorities = () => {
+    const prioritiesTags = ["A", "AA", "AAA"];
+
+    return (
+      <>
+        {prioritiesTags.map((item, index) => (
+          <div key={index} className="flex items-center gap-1 cursor-pointer">
+            <label className="cursor-pointer" htmlFor={`pri-${item}`}>
+              {item}
+            </label>
+            <input
+              type="radio"
+              className="cursor-pointer"
+              name="priority"
+              id={`pri-${item}`}
+              value={item}
+              checked={priority === item}
+              onChange={handlePriorityChange}
+            />
+          </div>
+        ))}
+      </>
+    );
+  };
 
   return (
     <div className="border-black border grid gap-4 p-4 mt-6">
@@ -52,48 +80,7 @@ export default function TaskDetails({
         <p>Priority: </p>
 
         <div className="flex gap-2 ">
-          <div className="flex items-center gap-1 cursor-pointer">
-            <label className="cursor-pointer" htmlFor="pri-a">
-              A
-            </label>
-            <input
-              type="radio"
-              className="cursor-pointer"
-              name="priority"
-              id="pri-a"
-              value="A"
-              onChange={handlePriorityChange}
-            />
-          </div>
-          <div className="flex items-center gap-1 cursor-pointer">
-            <label className="cursor-pointer" htmlFor="pri-aa">
-              AA
-            </label>
-            <input
-              type="radio"
-              className="cursor-pointer"
-              name="priority"
-              id="pri-aa"
-              value="AA"
-              onChange={handlePriorityChange}
-            />
-          </div>
-          <div className="flex items-center gap-1 cursor-pointer">
-            <label className="cursor-pointer" htmlFor="pri-aaa">
-              AAA
-            </label>
-            <input
-              type="radio"
-              className="cursor-pointer"
-              name="priority"
-              id="pri-aaa"
-              value="AAA"
-              onChange={handlePriorityChange}
-            />
-          </div>
-          {/* <Button className={"bg-red-600 px-2 py-1 rounded-lg"} label="AAA" />
-          <Button className={"bg-yellow-400 px-2 py-1 rounded-lg"} label="AA" />
-          <Button className={"bg-green-400 px-2 py-1 rounded-lg"} label="A" /> */}
+          <Priorities />
         </div>
 
         <Button
