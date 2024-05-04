@@ -2,13 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 import Button from "../utils/Button";
-import React from "react";
 
 interface Props {
   setShowTaskDetails: (value: boolean) => void;
-  addItem: (title: string) => void;
+  addItem: (title: string, priority: string) => void;
   setTitleValue: (value: string) => void;
   titleValue: string;
+  setPriority: (value: string) => void;
+  priority: string;
 }
 
 export default function TaskDetails({
@@ -16,15 +17,20 @@ export default function TaskDetails({
   addItem,
   setTitleValue,
   titleValue,
+  setPriority,
+  priority,
 }: Props) {
   // handle add item (task)
   const handleAddItem = () => {
-    addItem(titleValue);
+    addItem(titleValue, priority);
     setShowTaskDetails(false);
   };
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>): void =>
     setTitleValue(e.target.value);
+
+  const handlePriorityChange = (e: React.ChangeEvent<HTMLInputElement>): void =>
+    setPriority(e.target.value);
 
   return (
     <div className="border-black border grid gap-4 p-4 mt-6">
@@ -55,6 +61,8 @@ export default function TaskDetails({
               className="cursor-pointer"
               name="priority"
               id="pri-a"
+              value="A"
+              onChange={handlePriorityChange}
             />
           </div>
           <div className="flex items-center gap-1 cursor-pointer">
@@ -66,6 +74,8 @@ export default function TaskDetails({
               className="cursor-pointer"
               name="priority"
               id="pri-aa"
+              value="AA"
+              onChange={handlePriorityChange}
             />
           </div>
           <div className="flex items-center gap-1 cursor-pointer">
@@ -77,6 +87,8 @@ export default function TaskDetails({
               className="cursor-pointer"
               name="priority"
               id="pri-aaa"
+              value="AAA"
+              onChange={handlePriorityChange}
             />
           </div>
           {/* <Button className={"bg-red-600 px-2 py-1 rounded-lg"} label="AAA" />
