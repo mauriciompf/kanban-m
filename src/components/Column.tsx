@@ -5,13 +5,16 @@ import TaskDetails from "./TaskDetails";
 import ItemCard from "./ItemCard";
 
 export default function Column() {
-  const [items, setItems] = useState<string[]>([]);
+  const [items, setItems] = useState<{ title: string; priority: string }[]>([]);
   const [showTaskDetails, setShowTaskDetails] = useState<boolean>(false);
   const [titleValue, setTitleValue] = useState<string>("");
+  const [priority, setPriority] = useState<string>("");
 
   const handleNewTaskButton = (): void => setShowTaskDetails(true);
 
-  const addItem = (title: string): void => setItems([title, ...items]);
+  const addItem = (title: string, priority: string): void => {
+    setItems([{ title, priority }, ...items]);
+  };
 
   return (
     <div className="w-[18.75rem] border-solid border border-black p-4 m-8">
@@ -34,11 +37,17 @@ export default function Column() {
           addItem={addItem}
           setTitleValue={setTitleValue}
           titleValue={titleValue}
+          setPriority={setPriority}
+          priority={priority}
         />
       )}
 
       {items.map((item, index) => (
-        <ItemCard key={index} titleValue={item} />
+        <ItemCard
+          key={index}
+          titleValue={item.title}
+          priority={item.priority}
+        />
       ))}
     </div>
   );
