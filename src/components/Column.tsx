@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Button from "../utils/Button";
-import TaskDetails from "./TaskDetails";
 
+import TaskDetails from "./TaskDetails";
 import ItemCard from "./ItemCard";
 
+import { NewItem } from "../utils/types";
+
 export default function Column() {
-  const [items, setItems] = useState<{ title: string; priority: string }[]>([]);
+  const [items, setItems] = useState<NewItem[]>([]);
   const [showTaskDetails, setShowTaskDetails] = useState<boolean>(false);
   const [titleValue, setTitleValue] = useState<string>("");
   const [priority, setPriority] = useState<string>("");
@@ -34,7 +36,6 @@ export default function Column() {
       {showTaskDetails && (
         <TaskDetails
           setShowTaskDetails={setShowTaskDetails}
-          showTaskDetails
           addItem={addItem}
           setTitleValue={setTitleValue}
           titleValue={titleValue}
