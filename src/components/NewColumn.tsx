@@ -3,14 +3,20 @@ import Column from "./Column.tsx";
 import NewColumnButton from "../utils/NewColumnButton.tsx";
 
 const NewColumn = () => {
-  const [columns, setColumns] = useState<boolean>(true);
+  const [columns, setColumns] = useState<JSX.Element[]>([]);
 
   const addColumn = () => {
-    setColumns(false);
+    setColumns([...columns, <Column key={columns.length} />]);
   };
 
   return (
-    <>{columns ? <NewColumnButton addColumn={addColumn} /> : <Column />}</>
+    <>
+      {columns.map((column, index) => (
+        <div key={index}>{column}</div>
+      ))}
+
+      <NewColumnButton addColumn={addColumn} />
+    </>
   );
 };
 export default NewColumn;
