@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Button from "../utils/Button";
 
 import TaskDetails from "./TaskDetails";
@@ -11,6 +11,7 @@ export default function Column() {
   const [showTaskDetails, setShowTaskDetails] = useState<boolean>(false);
   const [titleValue, setTitleValue] = useState<string>("");
   const [priority, setPriority] = useState<string>("");
+  const [draggedItem, setDraggedItem] = useState<NewItem | null>(null);
 
   const handleNewTaskButton = (): void => setShowTaskDetails(true);
 
@@ -18,8 +19,32 @@ export default function Column() {
     setItems([{ title, priority }, ...items]);
   };
 
+  const handleOnDrag = (e: React.DragEvent, item: NewItem) => {
+    e.dataTransfer.setData("text/plain", JSON.stringify(item));
+    setDraggedItem(item);
+  };
+
+  const handleOnDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+
+    const data = e.dataTransfer.getData("text/plain");
+    const item = JSON.parse(data);
+    setItems([...items, item]);
+    setDraggedItem(null);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
   return (
-    <div className="w-[18.75rem] border-solid border border-black p-4 ">
+    // Column Box
+    <div
+      className="w-[18.75rem] border-solid border border-black p-4"
+      onDragOver={handleDragOver}
+      onDrop={(e) => handleOnDrop(e)}
+    >
+      {/* Column title */}
       <div className="border-b border-black pb-4 ">
         <input
           type="text"
@@ -27,12 +52,15 @@ export default function Column() {
           className="bg-transparent w-full"
         />
       </div>
+
+      {/* Add new task */}
       <Button
         onClick={handleNewTaskButton}
         className={"border-b border-black w-full py-2"}
         label="+ add new task"
       />
 
+      {/* Task Details */}
       {showTaskDetails && (
         <TaskDetails
           setShowTaskDetails={setShowTaskDetails}
@@ -44,8 +72,10 @@ export default function Column() {
         />
       )}
 
+      {/* Tasks list */}
       {items.map((item, index) => (
         <ItemCard
+          onDragStart={(e: React.DragEvent) => handleOnDrag(e, item)}
           key={index}
           titleValue={item.title}
           priority={item.priority}
