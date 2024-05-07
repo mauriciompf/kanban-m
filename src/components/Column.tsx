@@ -19,7 +19,7 @@ export default function Column() {
   };
 
   return (
-    <div className="w-[18.75rem] border-solid border border-black p-4 m-8">
+    <div className="w-[18.75rem] border-solid border border-black p-4 ">
       <div className="border-b border-black pb-4 ">
         <input
           type="text"
