@@ -6,17 +6,16 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 export default function ItemCard({
   titleValue,
   priority,
-  onDragStart,
-}: {
+}: // onDragStart,
+{
   titleValue: string;
   priority: string;
-  onDragStart: any;
+  // onDragStart: any;
 }) {
   return (
     <div
       className="flex items-center justify-between border border-black mt-4 p-4"
-      draggable
-      onDragStart={onDragStart}
+      // onDragStart={onDragStart}
     >
       <div className="grid">
         <p>{titleValue}</p>
