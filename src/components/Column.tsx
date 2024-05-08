@@ -11,7 +11,6 @@ export default function Column() {
   const [showTaskDetails, setShowTaskDetails] = useState<boolean>(false);
   const [titleValue, setTitleValue] = useState<string>("");
   const [priority, setPriority] = useState<string>("");
-  const [draggedItem, setDraggedItem] = useState<NewItem | null>(null);
 
   const handleNewTaskButton = (): void => setShowTaskDetails(true);
 
@@ -21,16 +20,12 @@ export default function Column() {
 
   const handleOnDrag = (e: React.DragEvent, item: NewItem) => {
     e.dataTransfer.setData("text/plain", JSON.stringify(item));
-    setDraggedItem(item);
   };
 
   const handleOnDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-
     const data = e.dataTransfer.getData("text/plain");
     const item = JSON.parse(data);
     setItems([...items, item]);
-    setDraggedItem(null);
   };
 
   const handleDragOver = (e: React.DragEvent) => {
