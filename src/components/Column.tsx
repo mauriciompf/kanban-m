@@ -1,10 +1,9 @@
 import { useState } from "react";
 import Button from "../utils/Button";
-
 import TaskDetails from "./TaskDetails";
 import ItemCard from "./ItemCard";
-
 import { NewItem } from "../utils/types";
+import { useDroppable } from "@dnd-kit/core";
 
 export default function Column() {
   const [items, setItems] = useState<NewItem[]>([]);
@@ -18,26 +17,20 @@ export default function Column() {
     setItems([{ title, priority }, ...items]);
   };
 
-  // const handleOnDrag = (e: React.DragEvent, item: NewItem) => {
-  //   e.dataTransfer.setData("text/plain", JSON.stringify(item));
-  // };
+  const { isOver, setNodeRef } = useDroppable({
+    id: "droppable",
+  });
 
-  // const handleOnDrop = (e: React.DragEvent) => {
-  //   const data = e.dataTransfer.getData("text/plain");
-  //   const item = JSON.parse(data);
-  //   setItems([...items, item]);
-  // };
-
-  // const handleDragOver = (e: React.DragEvent) => {
-  //   e.preventDefault();
-  // };
+  const style = {
+    color: isOver ? "green" : undefined,
+  };
 
   return (
     // Column Box
     <div
+      ref={setNodeRef}
+      style={style}
       className="w-[18.75rem] border-solid border border-black p-4"
-      // onDragOver={handleDragOver}
-      // onDrop={(e) => handleOnDrop(e)}
     >
       {/* Column title */}
       <div className="border-b border-black pb-4 ">
@@ -70,7 +63,6 @@ export default function Column() {
       {/* Tasks list */}
       {items.map((item, index) => (
         <ItemCard
-          // onDragStart={(e: React.DragEvent) => handleOnDrag(e, item)}
           key={index}
           titleValue={item.title}
           priority={item.priority}
