@@ -1,4 +1,5 @@
 import Button from "../utils/Button";
+import { useDraggable } from "@dnd-kit/core";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
@@ -6,16 +7,26 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 export default function ItemCard({
   titleValue,
   priority,
-}: // onDragStart,
-{
+}: {
   titleValue: string;
   priority: string;
-  // onDragStart: any;
 }) {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: "draggable",
+  });
+
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
   return (
     <div
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
       className="flex items-center justify-between border border-black mt-4 p-4"
-      // onDragStart={onDragStart}
     >
       <div className="grid">
         <p>{titleValue}</p>
